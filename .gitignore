@@ -3,5 +3,5 @@ backend/venv/
 
 
 # 
-backend/jobnexa_backend/.env
+backend/jobnexa_backend/app/.env
 
