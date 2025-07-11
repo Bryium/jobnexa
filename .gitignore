@@ -1,0 +1,7 @@
+# virtual environment
+backend/venv/
+
+
+# 
+backend/jobnexa_backend/.env
+
