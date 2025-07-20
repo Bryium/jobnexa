@@ -2,25 +2,22 @@ import google.generativeai as genai
 from app.core.config import settings
 
 genai.configure(api_key=settings.GEMINI_API_KEY)
-
 model = genai.GenerativeModel("gemini-pro")
 
-ROADMAP_PROMPT = """
-You are an expert career coach. Given a user's goal, generate a learning roadmap that spans 3 to 6 months.
-
-Respond in this format:
-Month 1:
-- ...
-Month 2:
-- ...
-...
-Use bullet points, keep it concise but actionable.
-"""
-
 async def generate_roadmap(goal: str) -> str:
+    prompt = f"""
+    You're an expert African career mentor. Generate a 3-month learning roadmap for someone who wants to become a(n): {goal}.
+    Format:
+    Month 1:
+    - ...
+    Month 2:
+    - ...
+    Month 3:
+    - ...
+    Keep it concise and relevant for African youth with limited internet access.
+    """
     try:
-        full_prompt = f"{ROADMAP_PROMPT}\n\nGoal: {goal}"
-        response = model.generate_content(full_prompt)
+        response = model.generate_content(prompt)
         return response.text
     except Exception as e:
-        return f"Roadmap Generation Error: {str(e)}"
+        return f"Gemini Error: {str(e)}"

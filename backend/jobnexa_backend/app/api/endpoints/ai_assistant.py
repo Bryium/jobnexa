@@ -1,16 +1,13 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from pydantic import BaseModel
-from app.services.ai_gemini import ask_gemini
+from app.services.roadmap import generate_roadmap
 
 router = APIRouter()
 
-class QueryInput(BaseModel):
-    query: str
+class GoalRequest(BaseModel):
+    goal: str
 
-@router.post("/mentor")
-async def mentor(query_input: QueryInput):
-    if not query.message.strip():
-        raise HTTPException(status_code=400, detail="Query cannot be empty")
-    
-    response = await ask_gemini(query.message)
-    return {"reply": response}
+@router.post("/generate-roadmap")
+async def generate_ai_roadmap(data: GoalRequest):
+    roadmap = await generate_roadmap(data.goal)
+    return {"roadmap": roadmap}

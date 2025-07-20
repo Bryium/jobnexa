@@ -21,6 +21,10 @@ app.include_router(profile.router, prefix="/api/profile", tags=["Profile"])
 app.include_router(roadmap.router, prefix="/api/roadmap", tags=["Roadmap"])
 app.include_router(recommender.router, prefix="/api/recommender", tags=["Recommender"])
 app.include_router(ai_assistant.router, prefix="/api/ai", tags=["AI Mentor"])
+from app.api.endpoints import roadmap
+app.include_router(roadmap.router, prefix="/api/ai")
+
+
 
 @app.on_event("startup")
 async def startup_event():
